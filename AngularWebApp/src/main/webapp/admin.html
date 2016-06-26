@@ -2,7 +2,8 @@
 <html ng-app="sportsStoreAdmin">
 <head>
 <title>Administration</title>
-<script src="angular.min.js"></script>
+<script
+	src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.js"></script>
 <script src="ngmodules/angular-route.js"></script>
 <link href="bootstrap.css" rel="stylesheet" />
 <link href="bootstrap-theme.css" rel="stylesheet" />
@@ -10,20 +11,19 @@
 	angular.module("sportsStoreAdmin", [ "ngRoute" ]).config(
 			function($routeProvider) {
 				$routeProvider.when("/login", {
-					templateUrl : "/views/adminLogin.html"
+					templateUrl : "views/adminLogin.html"
 				});
 				$routeProvider.when("/main", {
-					templateUrl : "/views/adminMain.html"
+					templateUrl : "views/adminMain.html"
 				});
 				$routeProvider.otherwise({
-					redirectTo : "/home"
+					redirectTo : "/login"
 				});
 			});
 </script>
 <script src="controllers/adminControllers.js"></script>
 </head>
 <body>
-	sdcfsfdsdfs
 	<ng-view/>
 </body>
 </html>
