@@ -25,8 +25,8 @@ angular
 						$scope.current = $scope.screens[index];
 					};
 					$scope.getScreen = function() {
-						return $scope.current == "Products" ? "/views/adminProducts.html"
-								: "/views/adminOrders.html";
+						return $scope.current == "Products" ? "views/adminProducts.html"
+								: "views/adminOrders.html";
 					};
 				}).controller("ordersCtrl", function($scope, $http, ordersUrl) {
 			$http.get(ordersUrl, {
