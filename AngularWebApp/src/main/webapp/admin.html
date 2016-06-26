@@ -5,11 +5,12 @@
 <script
 	src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.js"></script>
 <script src="ngmodules/angular-route.js"></script>
-<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular-resource.js"></script>
+<script
+	src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular-resource.js"></script>
 <link href="bootstrap.css" rel="stylesheet" />
 <link href="bootstrap-theme.css" rel="stylesheet" />
 <script>
-	angular.module("sportsStoreAdmin", [ "ngRoute" , "ngResource"]).config(
+	angular.module("sportsStoreAdmin", [ "ngRoute", "ngResource" ]).config(
 			function($routeProvider) {
 				$routeProvider.when("/login", {
 					templateUrl : "views/adminLogin.html"
@@ -26,6 +27,6 @@
 <script src="controllers/adminProductController.js"></script>
 </head>
 <body>
-	<ng-view/>
+	<ng-view />
 </body>
 </html>
