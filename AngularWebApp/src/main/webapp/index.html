@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html ng-app="sportsStore">
+<head>
+<title>SportsStore</title>
+<script
+	src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.js"></script>
+<script src="ngmodules/angular-route.js"></script>
+<link href="bootstrap.css" rel="stylesheet" />
+<link href="bootstrap-theme.css" rel="stylesheet" />
+<script type="text/javascript">
+	angular.module("sportsStore", [ "customFilters", "cart", "ngRoute" ])
+			.config(function($routeProvider) {
+				$routeProvider.when("/checkout", {
+					templateUrl : "views/checkoutSummary.html"
+				});
+				$routeProvider.when("/products", {
+					templateUrl : "views/productList.html"
+				});
+				$routeProvider.when("/complete", {
+					templateUrl : "views/thankYou.html"
+				});
+				$routeProvider.when("/placeorder", {
+					templateUrl : "views/placeOrder.html"
+				});
+				$routeProvider.otherwise({
+					templateUrl : "views/productList.html"
+				});
+				
+			});
+</script>
+<script type="text/javascript" src="controllers/sportsStore.js"></script>
+<script type="text/javascript"
+	src="controllers/productListControllers.js"></script>
+<script type="text/javascript" src="filters/customFilters.js"></script>
+<script src="components/cart/cart.js"></script>
+
+<script src="controllers/checkoutControllers.js"></script>
+</head>
+<body ng-controller="sportsStoreCtrl">
+	<div class="navbar navbar-inverse">
+		<a class="navbar-brand" href="#">SPORTS STORE</a>
+		<cart-summary />
+	</div>
+	<div class="alert alert-danger" ng-show="data.error">
+		Error ({{data.error.status}}). The product data was not loaded. <a
+			href="/app.html" class="alert-link">Click here to try again</a>
+	</div>
+	<ng-view />
+	<div class="panel panel-default row" ng-controller="productListCtrl"
+		ng-hide="data.error">
+		<div class="col-xs-4">
+			<a ng-click="selectCategory()"
+				class="btn btn-block btn-default btn-sm">Home</a> <a
+				ng-click="selectCategory(item)" ng-class="getCategoryClass(item)"
+				ng-repeat="item in data.products | orderBy:'category' | unique:'category'"
+				class=" btn btn-block btn-default btn-sm""> {{item}} </a>
+		</div>
+		<div class="col-xs-8">
+			<div class="well"
+				ng-repeat="item in data.products | filter:categoryFilterFn | range:selectedPage:pageSize">
+				<h3>
+					<strong>{{item.name}}</strong> <span
+						class="pull-right label label-primary"> {{item.price |
+						currency}} </span>
+				</h3>
+				<button ng-click="addProductToCart(item)"
+					class="btn btn-success pull-right"></button>
+				<span class="lead">{{item.description}}</span>
+			</div>
+			<div class="pull-right btn-group">
+				<a
+					ng-repeat="page in data.products | filter:categoryFilterFn | pageCount:pageSize"
+					ng-click="selectPage($index + 1)" class="btn btn-default"
+					ng-class="getPageClass($index + 1)"> {{$index + 1}} </a>
+			</div>
+		</div>
+
+		<ng-include src="'views/productList.html'"></ng-include>
+	</div>
+</body>
+</html>
+</html>
